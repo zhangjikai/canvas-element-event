@@ -10,8 +10,6 @@
 
     cce.SortArray.prototype = {
 
-
-
         add: function (ele) {
             if (ele == null) {
                 return;
@@ -39,6 +37,29 @@
             this._data[index] = ele;
         },
 
+        contains: function (ele) {
+            if (ele == null) {
+                return false;
+            }
+            var i, low, mid, high;
+            low = 0;
+            high = this._data.length - 1;
+            while (low <= high) {
+                mid = (low + high) / 2;
+
+                if (this._data[mid] == ele) {
+                    return true;
+                }
+                if (this._data[mid].compareToKey(ele) < 0) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+
+            return false;
+        },
+
         search: function (point) {
             var d;
             this.selectedElements.length = 0;
@@ -48,8 +69,6 @@
             for (var i = 0; i < this._data.length; i++) {
                 d = this._data[i];
                 if (d.compareToKey(point) > 0) {
-                    //console.log(d);
-                    //console.log(111);
                     break;
                 }
 
@@ -64,7 +83,6 @@
                 d = this._data[i];
                 this.unSelectedElements.push(d);
             }
-            //return this.selected;
         },
 
         print: function () {

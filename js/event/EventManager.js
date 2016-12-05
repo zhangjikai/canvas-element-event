@@ -14,6 +14,7 @@
             return this._targets[type];
         };
 
+
         this.addTarget = function (type, target) {
 
             if (type == null) {
@@ -26,7 +27,9 @@
                 this._targets[type] = new cce.SortArray();
             }
             var array = this._targets[type];
-            array.add(target);
+            if (!array.contains(target)) {
+                array.add(target);
+            }
         };
 
         this.removeTarget = function (type, target) {

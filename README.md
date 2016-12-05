@@ -1,8 +1,10 @@
 # Canvas 元素事件处理
 
 ## 功能
-* 支持自定义对象的 `addListener` 和 `removeListener`
+* 自定义对象的 `addListener` 和 `removeListener`
 * 支持`mouseover`, `mouseout`, `mouseover`, `click` 事件
+* 为事件添加多个 `listener`
+* 删除事件的全部或者特定的 `listener`
 
 ## 参考文章
 * [Custom events in JavaScript](https://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/)

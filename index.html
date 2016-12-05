@@ -55,10 +55,26 @@
         console.log("mouseover", event);
     })
 
-    rectangle.addListener("click", function(event) {
+    rectangle.addListener("click", click);
 
-        console.log("click", event);
-    });
+    rectangle.addListener("click", click2)
+
+    var flag = false;
+    function click() {
+        if (flag) {
+            rectangle.removeListener("click", click);
+            console.log(cce.EventManager.getTargets("click"));
+        }
+        console.log(1111);
+    }
+
+    function click2() {
+
+        console.log(2222);
+        flag = true;
+        rectangle.removeListener("click", click2);
+        console.log(cce.EventManager.getTargets("click"));
+    }
     container.draw();
 
 
