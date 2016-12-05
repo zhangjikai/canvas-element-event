@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Element Event Handler</title>
+
+    <style type="text/css">
+        #canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+
+<canvas id="canvas" width="500" height="500"></canvas>
+
+
+<script type="text/javascript" src="js/cce.js"></script>
+<script type="text/javascript" src="js/event/Event.js"></script>
+<script type="text/javascript" src="js/event/EventTarget.js"></script>
+<script type="text/javascript" src="js/event/EventManager.js"></script>
+
+<script type="text/javascript" src="js/Container.js"></script>
+<script type="text/javascript" src="js/SortArray.js"></script>
+
+<script type="text/javascript" src="js/shape/DisplayObject.js"></script>
+<script type="text/javascript" src="js/shape/Rectangle.js"></script>
+
+<script type="text/javascript">
+
+
+    var canvas = document.getElementById("canvas");
+
+    canvas.addEventListener("mouseover", function () {
+
+    });
+
+    var container = new cce.Container(canvas);
+    container.init();
+    var rectangle = new cce.Rectangle(10, 10, 100, 100);
+
+    container.addChild(rectangle);
+
+    var rectangle2 = new cce.Rectangle(210, 10, 100, 100);
+
+    rectangle2.addListener("mouseover", function (event) {
+        console.log("I am over");
+    });
+    rectangle2.addListener("mouseout", function (event) {
+        console.log("I am out");
+    });
+    container.addChild(rectangle2);
+    rectangle.addListener("mouseover", function (event) {
+        console.log("mouseover", event);
+    })
+
+    rectangle.addListener("click", function(event) {
+
+        console.log("click", event);
+    });
+    container.draw();
+
+
+</script>
+</body>
+</html>
