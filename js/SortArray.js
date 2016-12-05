@@ -19,7 +19,7 @@
 
             for (i = 0, index = 0; i < this._data.length; i++) {
                 data = this._data[i];
-                result = ele.compareToKey(data);
+                result = ele.compareTo(data);
                 if (result == null) {
                     return;
                 }
@@ -41,16 +41,19 @@
             if (ele == null) {
                 return false;
             }
+
+
             var i, low, mid, high;
             low = 0;
             high = this._data.length - 1;
             while (low <= high) {
-                mid = (low + high) / 2;
+                mid = parseInt((low + high) / 2);
 
                 if (this._data[mid] == ele) {
                     return true;
                 }
-                if (this._data[mid].compareToKey(ele) < 0) {
+
+                if (this._data[mid].compareTo(ele) < 0) {
                     low = mid + 1;
                 } else {
                     high = mid - 1;
@@ -68,11 +71,11 @@
 
             for (var i = 0; i < this._data.length; i++) {
                 d = this._data[i];
-                if (d.compareToKey(point) > 0) {
+                if (d.comparePointX(point) > 0) {
                     break;
                 }
 
-                if (d.compareTo(point)) {
+                if (d.hasPoint(point)) {
                     this.selectedElements.push(d);
                 } else {
                     this.unSelectedElements.push(d);
@@ -104,6 +107,8 @@
 
         reset: function () {
             this._data.length = 0;
+            this.selectedElements.length = 0;
+            this.unSelectedElements.length = 0;
         }
 
 

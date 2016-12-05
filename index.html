@@ -5,15 +5,67 @@
     <title>Canvas Element Event Handler</title>
 
     <style type="text/css">
-        #canvas {
-            border: 1px solid red;
+
+        body {
+            background: #efefef;
         }
+
+        #container {
+            width: 1012px;
+            margin: 0 auto;
+        }
+
+        #left {
+            float: left;
+            width: 700px;
+            padding: 0;
+            margin: 0;
+        }
+
+        #canvas {
+            border-radius: 10px;
+            border: 1px dashed #ccc;
+            background: #fff;
+        }
+
+        #right {
+            float: left;
+            width: 300px;
+            height: 500px;
+            margin: 0 0 0 12px;
+            padding: 0;
+
+        }
+
+        .output {
+            display: inline-block;
+            margin: 0;
+            width: 100%;
+            height: 480px;
+            overflow: auto;
+            font-family: sans-serif;
+            font-size: 1em;
+            line-height: 1.2em;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px dashed #ccc;
+            background: #fff;
+        }
+
+
     </style>
 </head>
 <body>
 
 
-<canvas id="canvas" width="500" height="500"></canvas>
+<div id="container">
+    <div id="left">
+        <canvas id="canvas" width="700" height="500"></canvas>
+    </div>
+    <div id="right">
+        <textarea class="output" id="msg"></textarea>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="js/cce.js"></script>
@@ -26,56 +78,72 @@
 
 <script type="text/javascript" src="js/shape/DisplayObject.js"></script>
 <script type="text/javascript" src="js/shape/Rectangle.js"></script>
+<script type="text/javascript" src="js/shape/Circle.js"></script>
+<script type="text/javascript" src="js/shape/Polygon.js"></script>
 
 <script type="text/javascript">
 
+    var output = document.getElementById('msg');
 
     var canvas = document.getElementById("canvas");
 
-    canvas.addEventListener("mouseover", function () {
-
-    });
-
     var container = new cce.Container(canvas);
-    container.init();
-    var rectangle = new cce.Rectangle(10, 10, 100, 100);
+    container.enableMouse();
+    container.enableClick();
 
-    container.addChild(rectangle);
+    var rec = new cce.Rectangle(50, 50, 100,50);
+    container.addChild(rec);
 
-    var rectangle2 = new cce.Rectangle(210, 10, 100, 100);
+    var rec2 = new cce.Rectangle(200, 50, 100,20);
+    container.addChild(rec2);
 
-    rectangle2.addListener("mouseover", function (event) {
-        console.log("I am over");
+    var circle = new cce.Circle(400, 100, 50);
+    container.addChild(circle);
+
+    var circle2 = new cce.Circle(550, 100, 20);
+    container.addChild(circle2);
+
+    var pol = new cce.Polygon([
+        {x: 250, y:300},
+        {x: 200, y:350},
+        {x: 300, y:350}
+    ]);
+    container.addChild(pol);
+
+    var pol2 = new cce.Polygon([
+        {x: 450, y:300},
+        {x: 440, y:320},
+        {x: 490, y:320}
+    ]);
+    container.addChild(pol2);
+
+    rec.addListener("mouseover", function() {
+       appendMsg("enter big rectangle...")
     });
-    rectangle2.addListener("mouseout", function (event) {
-        console.log("I am out");
+
+    rec2.addListener("mouseout", function() {
+        appendMsg("out small rectangle...")
     });
-    container.addChild(rectangle2);
-    rectangle.addListener("mouseover", function (event) {
-        console.log("mouseover", event);
-    })
 
-    rectangle.addListener("click", click);
 
-    rectangle.addListener("click", click2)
+    circle.addListener("click", function() {
+        appendMsg("click at big circle");
+    });
 
-    var flag = false;
-    function click() {
-        if (flag) {
-            rectangle.removeListener("click", click);
-            console.log(cce.EventManager.getTargets("click"));
-        }
-        console.log(1111);
-    }
+    circle.addListener("click", function() {
+        appendMsg("click at big circle");
+    });
+    circle2.addListener("mousemove", function() {
+        appendMsg("mouse move in small circle");
+    });
 
-    function click2() {
 
-        console.log(2222);
-        flag = true;
-        rectangle.removeListener("click", click2);
-        console.log(cce.EventManager.getTargets("click"));
-    }
     container.draw();
+
+
+    function appendMsg(msg) {
+        output.value = output.value + msg + "\n";
+    }
 
 
 </script>

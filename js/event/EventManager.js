@@ -28,8 +28,10 @@
             }
             var array = this._targets[type];
             if (!array.contains(target)) {
+                console.log(target);
                 array.add(target);
             }
+
         };
 
         this.removeTarget = function (type, target) {
