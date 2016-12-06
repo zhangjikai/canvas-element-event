@@ -17,6 +17,7 @@
 * apply call
 * addEventListener 添加参数
 * 调用父类方法 
+* isPointInPath
 
 
 ## 判断
