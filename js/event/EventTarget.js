@@ -12,6 +12,7 @@
     cce.EventTarget.prototype = {
         constructor: cce.EventTarget,
 
+        // 查看某个事件是否有监听
         hasListener: function (type) {
             if (this._listeners.hasOwnProperty(type)) {
                 return true;
@@ -20,8 +21,8 @@
             }
         },
 
+        // 为事件添加监听函数
         addListener: function (type, listener) {
-            //console.log(this._listeners);
             if (!this._listeners.hasOwnProperty(type)) {
                 this._listeners[type] = [];
             }
@@ -30,6 +31,7 @@
             cce.EventManager.addTarget(type, this);
         },
 
+        // 触发事件
         fire: function (type, event) {
             if (event == null || event.type == null) {
                 return;
@@ -43,6 +45,7 @@
             }
         },
 
+        // 如果listener 为null，则清除当前事件下的全部事件监听
         removeListener: function (type, listener) {
             if (listener == null) {
                 if (this._listeners.hasOwnProperty(type)) {
@@ -65,6 +68,4 @@
 
         }
     };
-
-
 }());

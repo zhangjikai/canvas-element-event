@@ -38,7 +38,6 @@
         },
 
         contains: function (ele) {
-
             if (ele == null) {
                 return false;
             }

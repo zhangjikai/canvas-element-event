@@ -9,7 +9,6 @@
             if (type == null) {
                 return;
             }
-
             type = this._getPrefix(type);
             return this._targets[type];
         };
@@ -48,6 +47,7 @@
             array.delete(target);
         };
 
+        // 将事件分为 mouse 和 click 两类
         this._getPrefix = function (type) {
             if (type.indexOf("mouse") != -1) {
                 return "mouse";

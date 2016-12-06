@@ -44,22 +44,19 @@
             }, false);
         },
 
-        _handleMouseMove: function (event, target) {
-            var point = target._windowToCanvas(event.clientX, event.clientY);
-            // mouseover
+        _handleMouseMove: function (event, container) {
+            // 这里传入container 主要是为了使用 _windowToCanvas函数
+            var point = container._windowToCanvas(event.clientX, event.clientY);
+
             var array = cce.EventManager.getTargets("mouse");
 
-            //console.log("mouse", array);
-            //console.log(array);
             if (array != null) {
-                //console.log(array);
                 array.search(point);
-                //console.log("selectedElements",selectedElements)
+                // 鼠标所在的元素
                 var selectedElements = array.selectedElements;
+                // 鼠标不在的元素
                 var unSelectedElements = array.unSelectedElements;
                 selectedElements.forEach(function (ele) {
-
-
                     if (ele.hasListener("mousemove")) {
                         var event = new cce.Event(point.x, point.y, "mousemove", ele);
                         ele.fire("mousemove", event);
@@ -72,8 +69,6 @@
                             ele.fire("mouseover", event);
                         }
                     }
-
-
                 });
 
                 unSelectedElements.forEach(function (ele) {
