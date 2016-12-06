@@ -91,10 +91,10 @@
     container.enableMouse();
     container.enableClick();
 
-    var rec = new cce.Rectangle(50, 50, 100,50);
+    var rec = new cce.Rectangle(50, 50, 100, 50);
     container.addChild(rec);
 
-    var rec2 = new cce.Rectangle(200, 50, 100,20);
+    var rec2 = new cce.Rectangle(200, 50, 100, 20);
     container.addChild(rec2);
 
     var circle = new cce.Circle(400, 100, 50);
@@ -104,42 +104,61 @@
     container.addChild(circle2);
 
     var pol = new cce.Polygon([
-        {x: 250, y:300},
-        {x: 200, y:350},
-        {x: 300, y:350}
+        {x: 250, y: 300},
+        {x: 200, y: 350},
+        {x: 300, y: 350}
     ]);
     container.addChild(pol);
 
     var pol2 = new cce.Polygon([
-        {x: 450, y:300},
-        {x: 440, y:320},
-        {x: 490, y:320}
+        {x: 450, y: 300},
+        {x: 440, y: 320},
+        {x: 490, y: 320}
     ]);
     container.addChild(pol2);
 
-    rec.addListener("mouseover", function() {
-       appendMsg("enter big rectangle...")
+    rec.addListener("mouseover", function () {
+        appendMsg("enter big rectangle...")
     });
 
-    rec2.addListener("mouseout", function() {
+    rec2.addListener("mouseout", function () {
         appendMsg("out small rectangle...")
     });
 
-
-    circle.addListener("click", function() {
+    circle.addListener("click", function () {
         appendMsg("click at big circle");
     });
 
-    circle.addListener("click", function() {
-        appendMsg("click at big circle");
-    });
-    circle2.addListener("mousemove", function() {
-        appendMsg("mouse move in small circle");
+    circle2.addListener("mousemove", move);
+
+    circle2.addListener("click", click);
+
+    pol.addListener("mouseover", function() {
+        appendMsg("enter big triangle")
     });
 
+    pol.addListener("mouseout", function() {
+        appendMsg("out big triangle")
+    });
 
+    pol2.addListener("mouseover", function() {
+        appendMsg("enter small triangle")
+    });
+
+    pol2.addListener("mouseout", function() {
+        appendMsg("out small triangle")
+    });
     container.draw();
 
+    function move() {
+        appendMsg("move in small circle...")
+    }
+
+    function click() {
+        circle2.removeListener("mousemove", move);
+        appendMsg("click at small circle...");
+        appendMsg("remove mouseover listener of small circle...");
+    }
 
     function appendMsg(msg) {
         output.value = output.value + msg + "\n";

@@ -6,12 +6,12 @@
         cce.Polygon = function (points) {
             cce.DisplayObject.call(this);
             this.points = points || null;
-            this.leftX = 0;
+            this.minX = 0;
             if (points != null) {
-                this.leftX = points[0].x;
+                this.minX = points[0].x;
                 for (var i = 0; i < points.length; i++) {
-                    if (this.leftX > points[i].x) {
-                        this.leftX = points[i].x;
+                    if (this.minX > points[i].x) {
+                        this.minX = points[i].x;
                     }
                 }
             }
@@ -40,16 +40,16 @@
 
         cce.Polygon.prototype.compareTo = function (target) {
 
-            if (target.leftX == null) {
+            if (target.minX == null) {
                 return null;
             }
-            if (this.leftX < target.leftX) {
+            if (this.minX < target.minX) {
                 return -1;
             }
-            if (this.leftX == target.leftX) {
+            if (this.minX == target.minX) {
                 return 0;
             }
-            if (this.leftX > target.leftX) {
+            if (this.minX > target.minX) {
                 return 1;
             }
             return null;
@@ -60,13 +60,13 @@
             if (point.x == null) {
                 return null;
             }
-            if (this.leftX < point.x) {
+            if (this.minX < point.x) {
                 return -1;
             }
-            if (this.leftX == point.x) {
+            if (this.minX == point.x) {
                 return 0;
             }
-            if (this.leftX > point.x) {
+            if (this.minX > point.x) {
                 return 1;
             }
         }

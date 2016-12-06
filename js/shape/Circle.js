@@ -7,7 +7,7 @@
         this.x = x || -1;
         this.y = y || -1;
         this.radius = radius || 0;
-        this.leftTopX = this.x - this.radius;
+        this.minX = this.x - this.radius;
 
     };
 
@@ -22,16 +22,16 @@
     };
 
     cce.Circle.prototype.compareTo = function (target) {
-        if (target.leftTopX == null) {
+        if (target.minX == null) {
             return null;
         }
-        if (this.leftTopX < target.leftTopX) {
+        if (this.minX < target.minX) {
             return -1;
         }
-        if (this.leftTopX == target.leftTopX) {
+        if (this.minX == target.minX) {
             return 0;
         }
-        if (this.leftTopX > target.leftTopX) {
+        if (this.minX > target.minX) {
             return 1;
         }
         return null;
@@ -41,29 +41,26 @@
         if (point.x == null) {
             return null;
         }
-        if (this.leftTopX < point.x) {
+        if (this.minX < point.x) {
             return -1;
         }
-        if (this.leftTopX == point.x) {
+        if (this.minX == point.x) {
             return 0;
         }
-        if (this.leftTopX > point.x) {
+        if (this.minX > point.x) {
             return 1;
         }
         return null;
     };
 
     cce.Circle.prototype.hasPoint = function (point) {
-        if (this.x == null || this.y == null || this.radius == null) {
-            return false;
-        }
+
         if (point.x == null || point.y == null) {
             return false;
         }
 
         var distance = Math.pow(point.x - this.x, 2) + Math.pow(point.y - this.y, 2) - Math.pow(this.radius, 2);
 
-        console.log(distance);
         if (distance < 0) {
             return true;
         } else {

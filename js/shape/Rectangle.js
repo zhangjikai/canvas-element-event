@@ -8,6 +8,7 @@
         this.y = y || -1;
         this.width = width || 0;
         this.height = height || 0;
+        this.minX = this.x;
     };
 
     cce.Rectangle.prototype = Object.create(cce.DisplayObject.prototype);
@@ -19,29 +20,39 @@
     };
 
     cce.Rectangle.prototype.compareTo = function (target) {
-        if (target.x == null) {
+        if (target.minX == null) {
             return null;
         }
-        if (this.x < target.x) {
+        if (this.minX < target.minX) {
             return -1;
         }
-        if (this.x == target.x) {
+        if (this.minX == target.minX) {
             return 0;
         }
-        if (this.x > target.x) {
+        if (this.minX > target.minX) {
             return 1;
         }
         return null;
     };
 
     cce.DisplayObject.prototype.comparePointX = function (point) {
-        return this.compareTo(point);
+        if (point.x == null) {
+            return null;
+        }
+        if (this.minX < point.x) {
+            return -1;
+        }
+        if (this.minX == point.x) {
+            return 0;
+        }
+        if (this.minX > point.x) {
+            return 1;
+        }
+        return null;
     };
 
     cce.Rectangle.prototype.hasPoint = function (target) {
-        if (this.x == null || this.y == null || this.width == null || this.height == null) {
-            return false;
-        }
+
         if (target.x == null || target.y == null) {
             return false;
         }

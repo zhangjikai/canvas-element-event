@@ -48,10 +48,13 @@
             var point = target._windowToCanvas(event.clientX, event.clientY);
             // mouseover
             var array = cce.EventManager.getTargets("mouse");
+
+            //console.log("mouse", array);
             //console.log(array);
             if (array != null) {
                 //console.log(array);
                 array.search(point);
+                //console.log("selectedElements",selectedElements)
                 var selectedElements = array.selectedElements;
                 var unSelectedElements = array.unSelectedElements;
                 selectedElements.forEach(function (ele) {
